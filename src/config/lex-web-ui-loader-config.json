@@ -1,0 +1,15 @@
+{
+  "connect": {
+    "contactFlowId": "",
+    "instanceId": "",
+    "apiGatewayEndpoint": "",
+    "promptForNameMessage": "",
+    "waitingForAgentMessage": "",
+    "waitingForAgentMessageIntervalSeconds": "",
+    "agentJoinedMessage": "",
+    "agentLeftMessage": "",
+    "chatEndedMessage": "",
+    "attachChatTranscript": "",
+    "transcriptMessageDelayInMsec": ""
+  }
+}
