@@ -263,12 +263,12 @@ Parameters:
     # See the README.md file for instructions on how to use your own bucket.
     BootstrapBucket:
         Type: String
-        Default: aws-bigdata-blog
+        Default: raychung-lex
         Description: >
             S3 bucket containing pre-staged nested templates and source artifacts
     BootstrapPrefix:
         Type: String
-        Default: artifacts/aws-lex-web-ui/artifacts
+        Default: stack
         Description: >
             S3 prefix where the templates and source are stored under
 
@@ -717,7 +717,7 @@ Resources:
         Condition: NeedsBot
         Properties:
             TimeoutInMinutes: 15
-            TemplateURL: !Sub "https://github.com/ray-chunkit-chung/aws-lex-web-ui/blob/main/templates/lexbot.yaml"
+            TemplateURL: !Sub "https://${BootstrapBucket}.s3.${AWS::Region}.amazonaws.com/${BootstrapPrefix}/templates/lexbot.yaml"
             Parameters:
                 ShouldDeleteBot: !Ref ShouldDeleteBot
                 ParentStackName: !Ref "AWS::StackName"
@@ -731,7 +731,7 @@ Resources:
         Type: AWS::CloudFormation::Stack
         Condition: NeedsCognito
         Properties:
-            TemplateURL: !Sub "https://github.com/ray-chunkit-chung/aws-lex-web-ui/blob/main/templates/cognito.yaml"
+            TemplateURL: !Sub "https://${BootstrapBucket}.s3.${AWS::Region}.amazonaws.com/${BootstrapPrefix}/templates/cognito.yaml"
             Parameters:
                 CognitoIdentityPoolName: !Ref CognitoIdentityPoolName
                 ForceCognitoLogin: !Ref ForceCognitoLogin
@@ -758,7 +758,7 @@ Resources:
     CodeBuildDeploy:
         Type: AWS::CloudFormation::Stack
         Properties:
-            TemplateURL: !Sub "https://github.com/ray-chunkit-chung/aws-lex-web-ui/blob/main/templates/codebuild-deploy.yaml"
+            TemplateURL: !Sub "https://${BootstrapBucket}.s3.${AWS::Region}.amazonaws.com/${BootstrapPrefix}/templates/codebuild-deploy.yaml"
             Parameters:
                 ResourcePrefix: !Ref "AWS::StackName"
                 CodeBuildName: !Ref CodeBuildName
@@ -866,7 +866,7 @@ Resources:
         Type: AWS::CloudFormation::Stack
         Condition: NeedsCognito
         Properties:
-            TemplateURL: !Sub "https://github.com/ray-chunkit-chung/aws-lex-web-ui/blob/main/templates/cognitouserpoolconfig.yaml"
+            TemplateURL: !Sub "https://${BootstrapBucket}.s3.${AWS::Region}.amazonaws.com/${BootstrapPrefix}/templates/cognitouserpoolconfig.yaml"
             Parameters:
                 CloudFrontUrl: !GetAtt CodeBuildDeploy.Outputs.WebAppBase
                 WebAppUrl: !Ref WebAppParentOrigin

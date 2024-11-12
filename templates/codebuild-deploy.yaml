@@ -18,35 +18,35 @@ Parameters:
     SourceBucket:
         Description: S3 bucket where the source is located
         Type: String
-        Default: aws-bigdata-blog
+        Default: raychung-lex
 
     SourcePrefix:
         Description: Prefix key to reference yaml templates
         Type: String
-        Default: artifacts
+        Default: stack
 
     SourceObject:
         Description: S3 object zip file containing the project source
         Type: String
-        Default: artifacts/aws-lex-web-ui/artifacts/src.zip
+        Default: stack/src.zip
 
     CustomResourceCodeObject:
         Type: String
         Description: >
             S3 object zip file containing Lambda custom resource functions
-        Default: artifacts/aws-lex-web-ui/artifacts/custom-resources.zip
+        Default: stack/custom-resources.zip
 
     InitiateChatLambdaCodeObject:
       Type: String
       Description: >
         S3 object zip file containing Lambda custom resource functions
-      Default: artifacts/aws-lex-web-ui/artifacts/initiate-chat-lambda.zip
+      Default: stack/initiate-chat-lambda.zip
 
     StreamingLambdaCodeObject:
       Type: String
       Description: >
         S3 object zip file containing Lambda custom resource functions
-      Default: artifacts/aws-lex-web-ui/artifacts/streaming-lambda.zip
+      Default: stack/streaming-lambda.zip
 
     CleanupBuckets:
         Type: String
